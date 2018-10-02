@@ -2,7 +2,7 @@
 
 # Vue Project #1: Monster Slayer
 
-![Website screenshot](https://screenshots.firefox.com/6zuF3y1gyOhvrG6G/kurolox.github.io)
+![Website screenshot](https://screenshotscdn.firefoxusercontent.com/images/610db904-b894-4ae9-a752-a137845edfce.png)
 
 This is my version of the first project from the Vue Udemy course made by Maximilian Schwarzmüller.
 
