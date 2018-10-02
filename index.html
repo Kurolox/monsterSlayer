@@ -12,7 +12,7 @@
         <div class="small-6 columns">
             <h1 class="text-center">YOU</h1>
             <div class="healthbar">
-                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white; width: 10%;" :style="{width: playerLife + '%'}">
+                <div class="healthbar text-center" :style="playerBarStyle">
 
                 </div>
             </div>
@@ -26,28 +26,33 @@
             </div>
         </div>
     </section>
-    <section class="row controls">
+    <section class="row controls" v-if="!isGameStarted">
         <div class="small-12 columns">
-            <button id="start-game">START NEW GAME</button>
+            <button id="start-game" @click="startGame()">START NEW GAME</button>
         </div>
     </section>
-    <section class="row controls">
-        <div class="small-12 columns">
-            <button id="attack" @click="attack">ATTACK</button>
-            <button id="special-attack">SPECIAL ATTACK</button>
-            <button id="heal">HEAL</button>
-            <button id="give-up">GIVE UP</button>
-        </div>
-    </section>
-    <section class="row log">
-        <div class="small-12 columns">
-            <ul>
-                <li>
-
-                </li>
-            </ul>
-        </div>
-    </section>
+    <div v-else>
+        <section class="row controls">
+            <div class="small-12 columns">
+                <button id="attack" @click="playerAttack()">ATTACK</button>
+                <button id="special-attack">SPECIAL ATTACK</button>
+                <button id="heal">HEAL</button>
+                <button id="give-up">GIVE UP</button>
+            </div>
+        </section>
+        <section class="row log">
+            <div class="small-12 columns">
+                <ul v-for="entry in log">
+                    <li class="player-turn">
+                        <p> {{entry.player}} </p>
+                    </li>
+                    <li class="monster-turn">
+                        <p> {{entry.monster}} </p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
 </div>
 
 <script src="js/vue.js"></script>
