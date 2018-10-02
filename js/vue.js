@@ -44,6 +44,20 @@ new Vue({
         }},
     },
     watch: {
-        
+        monsterLife: function(){
+            damageDealt = Math.floor(12 + Math.random() * 10); // Deals random damage between 12 and 21
+            this.playerLife -= damageDealt;
+            if(this.playerLife < 0){
+                this.playerLife = 0;
+            }
+            console.log("Player life: " + this.playerLife);
+
+            this.log.push({monster: "The monster deals " + damageDealt + " damage to the player."});
+
+            if(this.playerLife === 0){ 
+                // TODO: Call "You Lose" function
+                
+            }
+        },        
     },
 });
