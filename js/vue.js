@@ -2,6 +2,7 @@ new Vue({
     el: "#app",
     data: {
         isGameStarted: false,
+        isLogEnabled: false,
         playerLife: 100,
         monsterLife: 100,
         log: [],
@@ -56,50 +57,58 @@ new Vue({
             this.monsterAttack(); // Since we didn't attack, we have to manually call the monster attack.
         },
 
-        surrender: function(){
+        endGame: function(){
+            this.isGameStarted = false;
 
         },
 
         startGame: function(){
             this.isGameStarted = true;
+            this.isLogEnabled = true;
+
+            this.log = []; // Flushes the log
+            this.playerLife = 100; // Resets life counters
+            this.monsterLife = 100;
         },
     },
     computed: {
         monsterBarStyle: function(){return {
-            'background-color': "green",
+            'background-color': this.monsterLife <= 30 ? "red" : "green", // Bar goes green if 30% life or less
             margin: 0,
             color: "white",
             width: this.monsterLife + '%',
         }},
 
         playerBarStyle: function(){return {
-            'background-color': "green",
+            'background-color': this.playerLife <= 30 ? "red" : "green",
             margin: 0,
             color: "white",
             width: this.playerLife + '%',
         }},
     },
     watch: {
-        monsterLife: function(){
+        monsterLife: function(lifeTotal){
 
-            console.log("Monster life: " + this.monsterLife);
-            if(this.monsterLife === 0){ 
+            console.log("Monster life: " + lifeTotal);
+            if(lifeTotal == 0){ 
                 // TODO: Call "You Win" function
+                this.endGame();
                 
             }
-
-            this.monsterAttack(); // If he isn't dead, he attacks back.
-
+            
+            if (lifeTotal != 100){ // This prevents an attack when resetting the game
+            this.monsterAttack();  // If he isn't dead, he attacks back.
+            }
 
         },
         
-        playerLife: function(){
+        playerLife: function(lifeTotal){
 
-            console.log("Player life: " + this.playerLife);
+            console.log("Player life: " + lifeTotal);
 
-            if(this.playerLife === 0){ 
+            if(this.playerLife == 0){ 
                 // TODO: Call "You Lose" function
-                
+                this.endGame();
             }
         },
     },
