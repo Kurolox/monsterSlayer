@@ -100,7 +100,7 @@ new Vue({
 
             }
 
-            if (lifeTotal != 100) { // This prevents an attack when resetting the game
+            else if (lifeTotal != 100) { // This prevents an attack when resetting the game
                 this.monsterAttack();  // If he isn't dead, he attacks back.
             }
 
@@ -111,8 +111,11 @@ new Vue({
             console.log("Player life: " + lifeTotal);
 
             if (this.playerLife == 0) {
-                // TODO: Call "You Lose" function
                 this.endGame();
+                
+                if (confirm("You lost! Want to try again?")){ // If the user wants to play again, launch the game directly
+                    this.startGame();
+                }
             }
         },
     },
