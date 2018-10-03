@@ -15,7 +15,7 @@
                 <h1 class="text-center">YOU</h1>
                 <div class="healthbar">
                     <div class="healthbar text-center" :style="playerBarStyle">
-                        {{ playerLife }}
+                        {{ playerLife > 0 ? playerLife : ""}}
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <h1 class="text-center">MONSTER</h1>
                 <div class="healthbar">
                     <div class="healthbar text-center" :style="monsterBarStyle">
-                        {{ monsterLife }}
+                        {{ monsterLife  > 0 ? monsterLife : ""}}
                     </div>
                 </div>
             </div>
